@@ -1,4 +1,0 @@
-/home/andrei/Bayan/build/CMakeFiles/rebuild_cache.dir
-/home/andrei/Bayan/build/CMakeFiles/edit_cache.dir
-/home/andrei/Bayan/build/CMakeFiles/bayan_lib.dir
-/home/andrei/Bayan/build/CMakeFiles/bayan.dir
