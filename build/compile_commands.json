@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/andrei/Bayan/build",
+  "command": "/bin/c++  -DBOOST_ALL_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -I/home/andrei/Bayan/include} -I/home/andrei/Bayan/include  -g   -std=gnu++17 -o CMakeFiles/bayan_lib.dir/src/com_parser.cpp.o -c /home/andrei/Bayan/src/com_parser.cpp",
+  "file": "/home/andrei/Bayan/src/com_parser.cpp"
+},
+{
+  "directory": "/home/andrei/Bayan/build",
+  "command": "/bin/c++    -g   -std=gnu++17 -o CMakeFiles/bayan.dir/src/main.cpp.o -c /home/andrei/Bayan/src/main.cpp",
+  "file": "/home/andrei/Bayan/src/main.cpp"
+}
+]
