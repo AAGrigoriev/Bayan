@@ -4,7 +4,7 @@
 
 namespace bayan
 {
-    command_parser::command_parser(int argc, const char *argv[]) : _desc("options")
+    command_parser::command_parser(int argc, char *argv[]) : _desc("options")
     {
         _desc.add_options()("include,i", bpo::value<std::vector<fs::path>>(), "Include path for scanning")("exclude,e", bpo::value<std::vector<fs::path>>(), "Exclude directory")("level,l", bpo::value<int>()->default_value(-1), "Maximum depth of scan, -1 no limit")("size,s", bpo::value<int>()->default_value(5), "Minimum file size in bytes")("mask,m", bpo::value<std::vector<std::string>>(), "Masks for filename")("block,b", bpo::value<int>()->default_value(10), "Block size in bytes")("hash,h", bpo::value<std::string>()->default_value("crc16"), "Hash algorithm")("help,h", "Help screen");
 

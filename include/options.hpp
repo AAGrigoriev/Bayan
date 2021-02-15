@@ -3,7 +3,6 @@
 #include <vector>
 #include <string>
 
-
 namespace bayan
 {
     namespace bpo = boost::program_options;
@@ -17,24 +16,23 @@ namespace bayan
 
     struct opt_dir
     {
-        std::vector<fs::path>       includes_path;
-        std::vector<fs::path>       exclude_path;
-        int                         level_scanning;
-        int                         min_file_size;
-        std::vector<std::string>    mask_to_file;
+        std::vector<fs::path> includes_path;
+        std::vector<fs::path> exclude_path;
+        int level_scanning;
+        int min_file_size;
+        std::vector<std::string> mask_to_file;
     };
 
     struct opt_hash
     {
-        long                        block_size;
-        hash_algo                   h_algo;
-
+        long block_size;
+        hash_algo h_algo;
     };
 
     struct opt_data
     {
-        opt_dir  dir_opt;
         opt_hash hash_opt;
+        opt_dir dir_opt;
     };
 
 } // namespace bayan

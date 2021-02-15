@@ -7,13 +7,13 @@ namespace bayan
     class command_parser
     {
     public:
-        command_parser(int argc, const char *argv[]);
+        command_parser(int argc, char *argv[]);
 
         std::optional<opt_data> parse_data();
 
     private:
-        bpo::variables_map          _mp;
-        bpo::options_description    _desc;
+        bpo::variables_map _mp;
+        bpo::options_description _desc;
     };
 
 } // namespace bayan

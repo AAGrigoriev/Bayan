@@ -16,16 +16,13 @@ find_package(Threads)
 
 add_executable(${EXEC_NAME} ${SRC_PATH}/main.cpp)
 
+
 # LIBRARY 
 add_library(${W_LIB} ${SRC_PATH}/com_parser.cpp)
-
 target_link_libraries(${W_LIB}      PRIVATE ${Boost_LIBRARIES})
 target_include_directories(${W_LIB} PRIVATE ${Boost_INCLUDE_DIR})
-target_include_directories(${W_LIB} PRIVATE ${H_PATH}})
-
-
-# PROJECT 
-target_link_libraries(${EXEC_NAME}  PRIVATE ${W_LIB})
 target_include_directories(${W_LIB} PRIVATE ${H_PATH})
 
- 
+# PROJECT 
+target_link_libraries(${EXEC_NAME}      PRIVATE ${W_LIB})
+target_include_directories(${EXEC_NAME} PRIVATE ${H_PATH})
