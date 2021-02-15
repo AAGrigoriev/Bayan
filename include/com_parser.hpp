@@ -12,7 +12,7 @@ namespace bayan
         command_parser(int argc, char *argv[]);
 
         std::optional<opt_data> parse_data();
-
+        
     private:
         bpo::variables_map _mp;
         bpo::options_description _desc;
