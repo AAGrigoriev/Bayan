@@ -1,3 +1,5 @@
+#pragma once
+
 #include "options.hpp"
 #include <optional>
 #include <boost/program_options.hpp>
