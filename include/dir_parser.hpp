@@ -11,9 +11,15 @@ namespace bayan
         dir_parser(opt_dir &opt);
         dir_parser(opt_dir &&opt);
 
-        group_path scan_dir();
+        //group_path scan_dir();
+        group_path get_group_path();
 
     private:
+
+        group_path scan_dir();
+        group_path delete_uniqe_path(group_path& not_uniqe);
+
+
         filter_dir filter;
         opt_scan opt;
     };

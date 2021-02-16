@@ -12,6 +12,13 @@ namespace bayan
         //customize filter_dir
     }
 
+    group_path dir_parser::get_group_path()
+    {
+        group_path out = scan_dir();
+        delete_uniqe_path(out);
+        return out;
+    }
+
     group_path dir_parser::scan_dir()
     {
         group_path out;
@@ -25,14 +32,27 @@ namespace bayan
                 }
                 else
                 {
-                    fs::path const & temp_path = (*it).path();
+                    fs::path const &temp_path = (*it).path();
 
-                    if(filter.approach_file(temp_path))
+                    if (filter.approach_file(temp_path))
                     {
                         out[fs::file_size(temp_path)].push_back(temp_path);
                     }
                 }
             }
+        }
+    }
+
+    group_path delete_uniqe_path(group_path &not_uniqe)
+    {
+        for (auto it = not_uniqe.begin(); it != not_uniqe.end();)
+        {
+            if (it->second.size() < 2)
+            {
+                it = not_uniqe.erase(it);
+            }
+            else
+                ++it;
         }
     }
 

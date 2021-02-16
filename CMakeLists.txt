@@ -16,7 +16,6 @@ find_package(Threads)
 
 add_executable(${EXEC_NAME} ${SRC_PATH}/main.cpp)
 
-
 # LIBRARY 
 add_library(${W_LIB} 
                         ${SRC_PATH}/com_parser.cpp
