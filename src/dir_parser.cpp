@@ -17,19 +17,19 @@ namespace bayan
         group_path out;
         for (auto &path : opt.includes_path)
         {
-            fs::recursive_directory_iterator it{path, fs::directory_options::skip_permission_denied}, it_end{};
-
             for (fs::recursive_directory_iterator it{path, fs::directory_options::skip_permission_denied}, it_end{}; it != it_end; ++it)
             {
-                if((*it).is_directory() && !filter.is_valid_dir((*it).path()))
+                if (filter.approach_dir((*it).path()))
                 {
                     it.disable_recursion_pending();
                 }
                 else
                 {
-                    if((*it).is_regular_file() && !filter.is_valid_file((*it).path()))
+                    fs::path const & temp_path = (*it).path();
+
+                    if(filter.approach_file(temp_path))
                     {
-                        
+                        out[fs::file_size(temp_path)].push_back(temp_path);
                     }
                 }
             }
