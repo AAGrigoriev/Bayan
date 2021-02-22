@@ -19,14 +19,15 @@ namespace bayan
 
     struct opt_filter
     {
-        std::vector<fs::path> exclude_path;
+        std::vector<fs::path>    exclude_path;
         std::vector<std::string> mask_to_file;
+        int                      min_file_size;
     };
+
     struct opt_scan
     {
         std::vector<fs::path> includes_path;
-        int level_scanning;
-        int min_file_size;
+        int                   level_scanning;
     };
 
     struct opt_dir

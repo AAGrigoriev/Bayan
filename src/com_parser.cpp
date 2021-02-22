@@ -82,7 +82,7 @@ namespace bayan
 
             if (_mp.count("size"))
             {
-                out_data.dir_opt.scan_opt.min_file_size = _mp["size"].as<int>();
+                out_data.dir_opt.filter_opt.min_file_size = _mp["size"].as<int>();
             }
 
             if (_mp.count("mask"))

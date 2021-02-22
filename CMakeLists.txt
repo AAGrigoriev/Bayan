@@ -20,7 +20,8 @@ add_executable(${EXEC_NAME} ${SRC_PATH}/main.cpp)
 add_library(${W_LIB} 
                         ${SRC_PATH}/com_parser.cpp
                         ${SRC_PATH}/dir_parser.cpp
-)
+                        ${SRC_PATH}/filter.cpp
+                        ${SRC_PATH}/mask.cpp )
 
 target_link_libraries(${W_LIB}      PRIVATE ${Boost_LIBRARIES})
 target_include_directories(${W_LIB} PRIVATE ${Boost_INCLUDE_DIR})

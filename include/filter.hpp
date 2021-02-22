@@ -1,13 +1,23 @@
 #pragma once
 #include <filesystem>
+#include <vector>
+#include "options.hpp"
+#include "mask.hpp"
 
 namespace bayan
 {
     class filter_dir
     {
     public:
-        bool approach_dir(fs::path const &path) { return true; }
-        bool approach_file(fs::path const &path) { return true; }
+        explicit filter_dir(opt_filter&& filter);
+
+        bool approach_dir(const fs::path  &path);
+        bool approach_file(const fs::path  &path);
+
+    private:
+        opt_filter          filter_opt;
+        std::vector<mask>   filter_mask;
     };
+
 
 } // namespace bayan
