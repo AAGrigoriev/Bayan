@@ -14,7 +14,7 @@ namespace  bayan {
 
     private:
         void prepare(std::string& prep);
-        std::regex  reg;
+        std::regex  reg_;
     };
 }
 

@@ -8,7 +8,6 @@ namespace bayan
     class dir_parser
     {
     public:
-        dir_parser(opt_dir &opt);
         dir_parser(opt_dir &&opt);
 
         //group_path scan_dir();
@@ -17,11 +16,10 @@ namespace bayan
     private:
 
         group_path scan_dir();
-        group_path delete_uniqe_path(group_path& not_uniqe);
+        void delete_uniqe_path(group_path& not_uniqe);
 
-
-        filter_dir filter;
-        opt_scan opt;
+        filter_dir  filter_;
+        opt_scan    opt_;
     };
 
 } // namespace bayan

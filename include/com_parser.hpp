@@ -14,8 +14,8 @@ namespace bayan
         std::optional<opt_data> parse_data();
         
     private:
-        bpo::variables_map _mp;
-        bpo::options_description _desc;
+        bpo::variables_map       mp_;
+        bpo::options_description desc_;
     };
 
 } // namespace bayan

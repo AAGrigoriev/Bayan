@@ -15,9 +15,8 @@ namespace bayan
         bool approach_file(const fs::path  &path);
 
     private:
-        opt_filter          filter_opt;
-        std::vector<mask>   filter_mask;
+        opt_filter          filter_opt_;
+        std::vector<mask>   filter_mask_;
     };
-
 
 } // namespace bayan
