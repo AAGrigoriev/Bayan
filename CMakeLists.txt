@@ -22,6 +22,7 @@ add_library(${W_LIB}
                         ${SRC_PATH}/dir_parser.cpp
                         ${SRC_PATH}/filter.cpp
                         ${SRC_PATH}/mask.cpp
+                        ${SRC_PATH}/file_wrapper.cpp
                         ${SRC_PATH}/file_dublicate_parser.cpp
         )
 

@@ -1,20 +1,20 @@
 //
 // Created by andrei on 22.02.2021.
 //
-#pragma  once
+#pragma once
+
 #include <regex>
 #include <string>
 
-namespace  bayan {
+namespace bayan {
 
-    class mask {
-    public:
-        explicit mask(std::string& sting_in);
-        bool isValid(const std::string& to_match);
+class mask {
+ public:
+  explicit mask(const std::string& sting_in);
+  bool isValid(const std::string& to_match);
 
-    private:
-        void prepare(std::string& prep);
-        std::regex  reg_;
-    };
-}
-
+ private:
+  void prepare(const std::string& prep);
+  std::regex reg_;
+};
+}  // namespace bayan

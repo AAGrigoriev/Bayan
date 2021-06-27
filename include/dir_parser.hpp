@@ -1,25 +1,25 @@
 #pragma once
+
 #include <options.hpp>
 #include <unordered_map>
+
 #include "filter.hpp"
 
-namespace bayan
-{
-    class dir_parser
-    {
-    public:
-        dir_parser(opt_dir &&opt);
+namespace bayan {
 
-        //group_path scan_dir();
-        group_path get_group_path();
+class dir_parser {
+ public:
+  dir_parser(opt_dir&& opt);
 
-    private:
+  // group_path scan_dir();
+  group_path get_group_path();
 
-        group_path scan_dir();
-        void delete_uniqe_path(group_path& not_uniqe);
+ private:
+  group_path scan_dir();
+  void delete_uniqe_path(group_path& not_uniqe);
 
-        filter_dir  filter_;
-        opt_scan    opt_;
-    };
+  filter_dir filter_;
+  opt_scan opt_;
+};
 
-} // namespace bayan
+}  // namespace bayan

@@ -1,21 +1,19 @@
-#include "com_parser.hpp"
-#include <iostream>
 #include <filesystem>
+#include <iostream>
 
-int main(int argc, char *argv[])
-{
-    // bayan::command_parser parser{argc, argv};
+#include "com_parser.hpp"
 
-    // auto opt_parser = parser.parse_data();
+int main(int argc, char *argv[]) {
+    
+  bayan::command_parser parser{argc, argv};
 
-    // if (!opt_parser)
-    // {
-    //     return 0;
-    // }
+  auto opt_parser = parser.parse_data();
 
-    // std::cout << "I Have data\n";
-
- 
-
+  if (!opt_parser) {
     return 0;
+  }
+
+  std::cout << "I Have data\n";
+
+  return 0;
 }

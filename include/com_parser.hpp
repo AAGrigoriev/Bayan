@@ -1,21 +1,21 @@
 #pragma once
 
-#include "options.hpp"
-#include <optional>
 #include <boost/program_options.hpp>
+#include <optional>
 
-namespace bayan
-{
-    class command_parser
-    {
-    public:
-        command_parser(int argc, char *argv[]);
+#include "options.hpp"
 
-        std::optional<opt_data> parse_data();
-        
-    private:
-        bpo::variables_map       mp_;
-        bpo::options_description desc_;
-    };
+namespace bayan {
+    
+class command_parser {
+ public:
+  command_parser(int argc, char *argv[]);
 
-} // namespace bayan
+  std::optional<opt_data> parse_data();
+
+ private:
+  bpo::variables_map mp_;
+  bpo::options_description desc_;
+};
+
+}  // namespace bayan
