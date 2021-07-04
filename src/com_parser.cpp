@@ -4,14 +4,25 @@
 #include <iostream>
 
 namespace bayan {
-    
+
 command_parser::command_parser(int argc, char *argv[]) : desc_("options") {
-  desc_.add_options()("include,i", bpo::value<std::vector<fs::path>>(), "Include path for scanning")("exclude,e", bpo::value<std::vector<fs::path>>(), "Exclude directory")("level,l", bpo::value<int>()->default_value(-1), "Maximum depth of scan, -1 no limit")("size,s", bpo::value<int>()->default_value(5), "Minimum file size in bytes")("mask,m", bpo::value<std::vector<std::string>>(), "Masks for filename")("block,b", bpo::value<int>()->default_value(10), "Block size in bytes")("hash,h", bpo::value<std::string>()->default_value("crc32"), "Hash algorithm crc32 or crc16")("help,h", "Help screen");
+  desc_.add_options()("include,i", bpo::value<std::vector<fs::path>>(),
+                      "Include path for scanning")(
+      "exclude,e", bpo::value<std::vector<fs::path>>(), "Exclude directory")(
+      "level,l", bpo::value<int>()->default_value(-1),
+      "Maximum depth of scan, -1 no limit")("size,s",
+                                            bpo::value<int>()->default_value(5),
+                                            "Minimum file size in bytes")(
+      "mask,m", bpo::value<std::vector<std::string>>(), "Masks for filename")(
+      "block,b", bpo::value<int>()->default_value(10), "Block size in bytes")(
+      "hash,h", bpo::value<std::string>()->default_value("crc32"),
+      "Hash algorithm crc32 or crc16")("help,h", "Help screen");
 
   bpo::store(bpo::parse_command_line(argc, argv, desc_), mp_);
 
   bpo::notify(mp_);
 }
+
 
 std::optional<opt_data> command_parser::parse_data() {
   try {

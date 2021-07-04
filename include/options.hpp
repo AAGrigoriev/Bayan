@@ -9,10 +9,11 @@ namespace bayan {
 
 namespace bpo = boost::program_options;
 namespace fs = std::filesystem;
-using group_path = std::unordered_map<int, std::vector<fs::path>>;
-using vec_path = std::vector<fs::path>;
 
-enum class hash_algo { crc_16 = 0, crc_32 };
+using vec_path = std::vector<fs::path>;
+using group_path = std::unordered_map<int, vec_path>;
+
+enum class hash_algo { crc_32 = 0, md5 };
 
 struct opt_filter {
   std::vector<fs::path> exclude_path;

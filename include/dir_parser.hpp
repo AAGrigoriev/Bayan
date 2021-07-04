@@ -11,7 +11,6 @@ class dir_parser {
  public:
   dir_parser(opt_dir&& opt);
 
-  // group_path scan_dir();
   group_path get_group_path();
 
  private:
