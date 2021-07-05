@@ -4,16 +4,18 @@
 #pragma once
 
 #include <memory>
+
 #include "file_comparator.hpp"
 #include "options.hpp"
 
 namespace bayan {
 
 class file_dublicate_parser {
-  file_dublicate_parser(opt_hash&& hash);
+  explicit file_dublicate_parser(opt_hash&& hash);
 
   vec_path scan_dublicate(const group_path& g_path);
 
+ private:
   std::unique_ptr<IFile_comparator> m_pimpl;
 };
 
