@@ -1,2 +1,1 @@
 # Bayan
-Dublicate file analyzer
