@@ -3,9 +3,11 @@ cmake_minimum_required(VERSION 3.10)
 project(bayan)
 
 set(CMAKE_CXX_STANDARD 17)
-set(SRC_PATH "src")
-set(H_PATH   "include")
-set(W_LIB ${CMAKE_PROJECT_NAME}_lib)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(SRC_PATH  "src")
+set(H_PATH    "include")
+set(W_LIB     ${CMAKE_PROJECT_NAME}_lib)
 set(EXEC_NAME ${CMAKE_PROJECT_NAME})
 
 find_package( Boost COMPONENTS program_options REQUIRED )
@@ -22,7 +24,6 @@ add_library(${W_LIB}
                         ${SRC_PATH}/dir_parser.cpp
                         ${SRC_PATH}/filter.cpp
                         ${SRC_PATH}/mask.cpp
-                        ${SRC_PATH}/file_wrapper.cpp
                         ${SRC_PATH}/file_dublicate_parser.cpp
         )
 

@@ -8,12 +8,12 @@
 
 namespace bayan {
 
-mask::mask(const std::string& string_in) {
+mask::mask(std::string string_in) {
   prepare(string_in);
   reg_.assign(string_in);
 }
 
-void mask::prepare(const std::string& prep) {
+void mask::prepare(std::string& prep) {
   prep.erase(std::find(prep.begin(), prep.end(), '*'));
   prep.erase(std::find(prep.begin(), prep.end(), '.'));
 }

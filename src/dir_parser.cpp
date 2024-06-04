@@ -2,7 +2,7 @@
 
 namespace bayan {
 
-dir_parser::dir_parser(opt_dir &&dir)
+dir_parser::dir_parser(opt_dir&& dir)
     : filter_(std::move(dir.filter_opt)), opt_(std::move(dir.scan_opt)) {}
 
 group_path dir_parser::get_group_path() {
@@ -13,7 +13,7 @@ group_path dir_parser::get_group_path() {
 
 group_path dir_parser::scan_dir() {
   group_path out;
-  for (auto &path : opt_.includes_path) {
+  for (auto& path : opt_.includes_path) {
     for (fs::recursive_directory_iterator
              it{path, fs::directory_options::skip_permission_denied},
          it_end{};
@@ -21,7 +21,7 @@ group_path dir_parser::scan_dir() {
       if (filter_.approach_dir((*it).path())) {
         it.disable_recursion_pending();
       } else {
-        const fs::path  &temp_path = (*it).path();
+        const fs::path& temp_path = (*it).path();
 
         if (filter_.approach_file(temp_path)) {
           out[fs::file_size(temp_path)].push_back(temp_path);
@@ -29,9 +29,11 @@ group_path dir_parser::scan_dir() {
       }
     }
   }
+
+  return out;
 }
 
-void delete_uniqe_path(group_path &not_uniqe) {
+void dir_parser::delete_uniqe_path(group_path& not_uniqe) {
   for (auto it = not_uniqe.begin(); it != not_uniqe.end();) {
     if (it->second.size() < 2)
       it = not_uniqe.erase(it);

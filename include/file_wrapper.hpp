@@ -4,7 +4,6 @@
 #include <boost/crc.hpp>
 #include <boost/uuid/detail/md5.hpp>
 #include <fstream>
-#include <string>
 
 #include "options.hpp"
 
@@ -36,7 +35,8 @@ namespace bayan {
 */
 template <typename T>
 class file_wrapper {
-  std::vector<T>::iterator type_it;
+public:
+  using type_it = typename std::vector<T>::const_iterator;
 
  public:
   file_wrapper(const fs::path& path, std::size_t file_size,
@@ -68,7 +68,7 @@ class file_wrapper {
 
     bool isComplite() { return hashes_.size() * block_size_ == file_size_; }
 
-    T& next_block(type_it it, std::ifstream & stream) {
+    const T& next_block(type_it it, std::ifstream & stream) {
       if (it == hashes_.end() && !isComplite()) {
         char buffer[block_size_];
         std::fill(buffer, buffer + block_size_, 0);
@@ -79,17 +79,16 @@ class file_wrapper {
 
         stream.seekg(hashes_.size() * block_size_);
         stream.read(buffer, block_size_);
-        hashes_.emplace_back(calc_check_sum(buffer, block_size_));
+        hashes_.push_back(calc_check_sum<T>(buffer, block_size_));
         return hashes_.back();
       }
       return *it++;
     }
 
-    fs::path name_;           // путь до файла
-    std::size_t file_size_;   // размер файла
-    std::size_t block_size_;  // размер блока
-    std::vector<T>
-        hashes_;  // хеши блока в котором находится файл, либо мд5, либо crc32
+    fs::path       name_;           // путь до файла
+    std::size_t    file_size_;   // размер файла
+    std::size_t    block_size_;  // размер блока
+    std::vector<T> hashes_;  // хеши блока в котором находится файл, либо мд5, либо crc32
   };
 
 }  // namespace bayan

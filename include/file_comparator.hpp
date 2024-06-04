@@ -16,30 +16,34 @@ class IFile_comparator {
 template <typename hash_algo>
 class file_comparator : public IFile_comparator {
  public:
-  file_comparator(std::size_t block_size) : block_size(block_size) {}
+  file_comparator(std::size_t block_size) : block_size_(block_size) {}
 
-  void add_path(const group_path& size_paths) {
+  void add_paths(const group_path& size_paths) override{
     for (const auto& param : size_paths) {
-      v_file_wrapper.clear();
+      v_file_wrapper_.clear();
       for (const auto& path : param.second) {
-        auto file_wrapper =
-            file_wrapper<hash_algo>(path, fs::file_size(path), block_size);
-        if (std::any_of(v_file_wrapper.begin(), v_file_wrapper.end(),
-                        [&v_file_wrapper](const auto& wrapper) {
-                          return v_file_wrapper == wrapper;
+        auto temp_wrapper =
+            file_wrapper<hash_algo>(path, fs::file_size(path), block_size_);
+        if (std::any_of(v_file_wrapper_.begin(), v_file_wrapper_.end(),
+                        [&temp_wrapper](const auto& wrapper) {
+                          return temp_wrapper == wrapper;
                         })) {
-          v_file_wrapper.push_back(std::move(file_wrapper));
+          v_file_wrapper_.push_back(std::move(temp_wrapper));
         } else {
-          duplicates.push_back(path);
+          duplicates_.push_back(path);
         }
       }
     }
   }
 
+  const vec_path& duplicates() const override {
+      return duplicates_;
+  }
+
  private:
   std::size_t block_size_;
   std::vector<file_wrapper<hash_algo>> v_file_wrapper_;
-  std::vector<std::string> duplicates_;
+  std::vector<fs::path> duplicates_;
 };
 
 }  // namespace bayan
