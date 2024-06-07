@@ -72,3 +72,10 @@ enable_testing()
 add_test(${TEST_NAME}  ${TEST_NAME})
 
 file(COPY ${CMAKE_SOURCE_DIR}/test/data DESTINATION ${CMAKE_BINARY_DIR})
+
+install(TARGETS ${EXEC_NAME} RUNTIME DESTINATION bin)
+
+set(CPACK_GENERATOR DEB)
+set(CPACK_PACKAGE_CONTACT grigormaklaud@gmail.com)
+set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
+include(CPack)
