@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
-if(DEFINED ENV{TRAVIS_BUILD_NUMBER})
-    set(VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+if(DEFINED ENV{GITHUB_RUN_NUMBER})
+    set(VERSION 0.0.$ENV{GITHUB_RUN_NUMBER})
 else()
     set(VERSION 0.0.1)
 endif()
