@@ -32,12 +32,6 @@ group_path dir_parser::scan_dir() {
                it{path, fs::directory_options::skip_permission_denied},
            it_end{};
            it != it_end; ++it) {
-        if (fs::is_regular_file(it->path())) {
-          std::cout << path.string()
-                    << " file size = " << fs::file_size(it->path())
-                    << std::endl;
-        }
-
         if (const auto& path = it->path(); filter_.approach_file(path)) {
           out[fs::file_size(path)].push_back(path);
         }
