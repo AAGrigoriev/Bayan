@@ -46,7 +46,7 @@ target_link_libraries(${EXEC_NAME}      PRIVATE ${W_LIB})
 target_include_directories(${EXEC_NAME} PRIVATE ${H_PATH})
 
 # Test
-find_package(GTest REQUIRED)
+find_package(GTest CONFIG REQUIRED)
 include(GoogleTest)
 
 add_executable(${TEST_NAME}
@@ -55,7 +55,14 @@ add_executable(${TEST_NAME}
   ${TEST_PATH}/bayan_test.cpp
 )
 
-target_link_libraries(${TEST_NAME} PRIVATE pthread GTest::gtest_main ${W_LIB})
+target_link_libraries(${TEST_NAME} PRIVATE
+  pthread
+  GTest::gtest
+  GTest::gmock
+  ${W_LIB})
+
 target_include_directories(${TEST_NAME} PRIVATE ${H_PATH})
 enable_testing()
 add_test(${TEST_NAME}  ${TEST_NAME})
+
+file(COPY ${CMAKE_SOURCE_DIR}/test/data DESTINATION ${CMAKE_BINARY_DIR})

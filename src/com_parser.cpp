@@ -36,18 +36,15 @@ std::optional<opt_data> command_parser::parse_data() {
       auto& elem = mp_["include"].as<std::vector<fs::path>>();
 
       for (auto& path : elem) {
-        std::cout << path.string() << std::endl;
-        if (fs::is_directory(path)) {
-          if (path.is_relative()) {
-            std::error_code error;
-            fs::path temp_path = fs::canonical(path, error);
-            if (!error) {
-              out_data.dir_opt.scan_opt.includes_path.push_back(temp_path);
-            } else
-              std::cerr << error.message() << " on" << path;
+        if (path.is_relative()) {
+          std::error_code error;
+          fs::path temp_path = fs::canonical(path);
+          if (!error) {
+            out_data.dir_opt.scan_opt.includes_path.push_back(temp_path);
           } else
-            out_data.dir_opt.scan_opt.includes_path.push_back(path);
-        }
+            std::cerr << error.message() << " on" << path;
+        } else if (fs::is_directory(path))
+          out_data.dir_opt.scan_opt.includes_path.push_back(path);
       }
     } else {
       throw std::logic_error("empty include field");
