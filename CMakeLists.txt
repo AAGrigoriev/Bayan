@@ -20,7 +20,6 @@ set(TEST_PATH "test/")
 
 find_package(Boost COMPONENTS program_options REQUIRED )
 #include_directories( ${Boost_INCLUDE_DIR} )
-
 find_package(Threads)
 #find_package(Doxygen COMPONENTS dot)
 
