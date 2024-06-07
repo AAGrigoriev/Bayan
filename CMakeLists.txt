@@ -1,6 +1,12 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(bayan)
+if(DEFINED ENV{TRAVIS_BUILD_NUMBER})
+    set(VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+else()
+    set(VERSION 0.0.1)
+endif()
+
+project(bayan VERSION ${VERSION})
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
