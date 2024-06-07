@@ -11,10 +11,10 @@
 namespace bayan {
 
 class file_dublicate_parser {
-  public:
+ public:
   explicit file_dublicate_parser(opt_hash&& hash);
 
-  parsing_result scan_dublicate(const group_path& g_path);
+  [[nodiscard]] parsing_result scan_dublicate(const group_path& g_path);
 
  private:
   std::unique_ptr<IFile_comparator> m_pimpl;

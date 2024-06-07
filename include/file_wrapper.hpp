@@ -70,7 +70,7 @@ class file_wrapper {
 
   bool not_complete() { return hashes_.size() * block_size_ < file_size_; }
 
-  const T& next_block(type_it it, std::ifstream& stream) {
+  [[nodiscard]] const T& next_block(type_it it, std::ifstream& stream) {
     if (not_complete()) {
       char buffer[block_size_];
       std::fill(buffer, buffer + block_size_, 0);

@@ -6,8 +6,6 @@
 #include <gmock/gmock-matchers.h>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-#include <iostream>
-#include <sstream>
 #include <string>
 #include <vector>
 
@@ -65,7 +63,7 @@ TEST_F(Bayan_Test, Test_1_Masks) {
 }
 
 TEST_F(Bayan_Test, Test_1_Size) {
-  auto result = Run({"bayan", "-idata/test_1/", "-s100"});
+  auto result = Run({"bayan", "-idata/test_1/", "-s100", "-m*.cpp", "-m*.txt"});
   ASSERT_EQ(result.size(), (std::size_t)1);
   ASSERT_EQ(result[0].size(), (std::size_t)2);
   ASSERT_THAT(result[0],
@@ -73,7 +71,7 @@ TEST_F(Bayan_Test, Test_1_Size) {
 }
 
 TEST_F(Bayan_Test, Test_2_Level) {
-  auto result = Run({"bayan", "-idata/test_2", "-l1"});
+  auto result = Run({"bayan", "-idata/test_2", "-r1", "-m*.cpp", "-m*.txt"});
   ASSERT_EQ(result.size(), (std::size_t)2);
   ASSERT_EQ(result[0].size(), (std::size_t)2);
   ASSERT_EQ(result[1].size(), (std::size_t)2);
@@ -83,8 +81,8 @@ TEST_F(Bayan_Test, Test_2_Level) {
 }
 
 TEST_F(Bayan_Test, Test_2_Exclude) {
-  auto result =
-      Run({"bayan", "-idata/test_2/", "-edata/test_2/level_1/", "-l1"});
+  auto result = Run({"bayan", "-idata/test_2/", "-edata/test_2/level_1/", "-r1",
+                     "-m*.cpp", "-m*.txt"});
   ASSERT_EQ(result.size(), (std::size_t)1);
   ASSERT_EQ(result[0].size(), (std::size_t)2);
   ASSERT_THAT(result[0],
@@ -92,7 +90,7 @@ TEST_F(Bayan_Test, Test_2_Exclude) {
 }
 
 TEST_F(Bayan_Test, Test_3_Multi) {
-  auto result = Run({"bayan", "-idata/test_3/", "-l2"});
+  auto result = Run({"bayan", "-idata/test_3/", "-r1", "-m*.cpp", "-m*.txt"});
   ASSERT_EQ(result.size(), (std::size_t)1);
   ASSERT_EQ(result[0].size(), (std::size_t)3);
   // EXPECT_THAT(result[0], ElementsAre( StrEq("file3.txt"), StrEq("file1.txt"),
