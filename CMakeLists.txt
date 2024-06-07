@@ -9,8 +9,10 @@ set(SRC_PATH  "src")
 set(H_PATH    "include")
 set(W_LIB     ${CMAKE_PROJECT_NAME}_lib)
 set(EXEC_NAME ${CMAKE_PROJECT_NAME})
+set(TEST_NAME gtest_${CMAKE_PROJECT_NAME})
+set(TEST_PATH "test/")
 
-find_package( Boost COMPONENTS program_options REQUIRED )
+find_package(Boost COMPONENTS program_options REQUIRED )
 #include_directories( ${Boost_INCLUDE_DIR} )
 
 find_package(Threads)
@@ -42,3 +44,18 @@ target_include_directories(${W_LIB} PRIVATE ${H_PATH})
 # PROJECT 
 target_link_libraries(${EXEC_NAME}      PRIVATE ${W_LIB})
 target_include_directories(${EXEC_NAME} PRIVATE ${H_PATH})
+
+# Test
+find_package(GTest REQUIRED)
+include(GoogleTest)
+
+add_executable(${TEST_NAME}
+  ${TEST_PATH}/main_test.cpp
+  ${TEST_PATH}/mask_test.cpp
+  ${TEST_PATH}/bayan_test.cpp
+)
+
+target_link_libraries(${TEST_NAME} PRIVATE pthread GTest::gtest_main ${W_LIB})
+target_include_directories(${TEST_NAME} PRIVATE ${H_PATH})
+enable_testing()
+add_test(${TEST_NAME}  ${TEST_NAME})

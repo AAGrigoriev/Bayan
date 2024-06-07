@@ -11,7 +11,7 @@ namespace bayan {
 class mask {
  public:
   explicit mask(std::string sting_in);
-  bool isValid(const std::string& to_match);
+  bool is_valid(const std::string& to_match);
 
  private:
   std::string prepare(std::string prep);

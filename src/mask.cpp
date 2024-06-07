@@ -4,7 +4,7 @@
 
 #include "mask.hpp"
 
-#include <algorithm>
+#include <boost/algorithm/string/replace.hpp>
 
 namespace bayan {
 
@@ -12,16 +12,15 @@ mask::mask(std::string string_in)
     : reg_(prepare(string_in), std::regex::icase) {}
 
 std::string mask::prepare(std::string prep) {
-  if (const auto pos = prep.find('*'); pos != std::string::npos) {
-    prep.erase(pos, 1);
-  }
-  if (const auto pos = prep.find('.'); pos != std::string::npos) {
-    prep.erase(pos, 1);
-  }
+  boost::replace_all(prep, ".", "\\.");
+  boost::replace_all(prep, "*", "\\*");
+  boost::replace_all(prep, "?", "\\?");
+  boost::replace_all(prep, "\\?", ".");
+  boost::replace_all(prep, "\\*", ".*");
   return prep;
 }
 
-bool mask::isValid(const std::string& to_match) {
+bool mask::is_valid(const std::string& to_match) {
   return std::regex_search(to_match, reg_);
 }
 

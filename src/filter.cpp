@@ -24,7 +24,7 @@ bool filter_dir::approach_file(const fs::path& path) {
       fs::file_size(path) >= filter_opt_.min_file_size) {
     return std::any_of(
         filter_mask_.begin(), filter_mask_.end(),
-        [&path](mask& mask_) { return mask_.isValid(path.string()); });
+                [&path](mask& mask_) { return mask_.is_valid(path.string()); });
   }
   return false;
 }
