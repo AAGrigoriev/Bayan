@@ -8,18 +8,21 @@
 
 namespace bayan {
 
-mask::mask(std::string string_in) {
-  prepare(string_in);
-  reg_.assign(string_in);
-}
+mask::mask(std::string string_in)
+    : reg_(prepare(string_in), std::regex::icase) {}
 
-void mask::prepare(std::string& prep) {
-  prep.erase(std::find(prep.begin(), prep.end(), '*'));
-  prep.erase(std::find(prep.begin(), prep.end(), '.'));
+std::string mask::prepare(std::string prep) {
+  if (const auto pos = prep.find('*'); pos != std::string::npos) {
+    prep.erase(pos, 1);
+  }
+  if (const auto pos = prep.find('.'); pos != std::string::npos) {
+    prep.erase(pos, 1);
+  }
+  return prep;
 }
 
 bool mask::isValid(const std::string& to_match) {
-  return std::regex_match(to_match, reg_);
+  return std::regex_search(to_match, reg_);
 }
 
 }  // namespace bayan

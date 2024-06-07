@@ -14,7 +14,7 @@ class mask {
   bool isValid(const std::string& to_match);
 
  private:
-  void prepare(std::string& prep);
+  std::string prepare(std::string prep);
   std::regex reg_;
 };
 }  // namespace bayan

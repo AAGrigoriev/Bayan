@@ -5,11 +5,11 @@
 
 namespace bayan {
 
-command_parser::command_parser(int argc, char *argv[]) : desc_("options") {
+command_parser::command_parser(int argc, char* argv[]) : desc_("options") {
   desc_.add_options()("include,i", bpo::value<std::vector<fs::path>>(),
                       "Include path for scanning")(
       "exclude,e", bpo::value<std::vector<fs::path>>(), "Exclude directory")(
-      "level,l", bpo::value<int>()->default_value(-1),
+      "recursive,r", bpo::value<bool>()->default_value(false),
       "Maximum depth of scan, -1 no limit")("size,s",
                                             bpo::value<int>()->default_value(5),
                                             "Minimum file size in bytes")(
@@ -23,7 +23,6 @@ command_parser::command_parser(int argc, char *argv[]) : desc_("options") {
   bpo::notify(mp_);
 }
 
-
 std::optional<opt_data> command_parser::parse_data() {
   try {
     if (mp_.count("help")) {
@@ -34,10 +33,11 @@ std::optional<opt_data> command_parser::parse_data() {
     opt_data out_data;
 
     if (mp_.count("include")) {
-      auto &elem = mp_["include"].as<std::vector<fs::path>>();
+      auto& elem = mp_["include"].as<std::vector<fs::path>>();
 
-      for (auto &path : elem) {
-        if (fs::exists(path)) {
+      for (auto& path : elem) {
+        std::cout << path.string() << std::endl;
+        if (fs::is_directory(path)) {
           if (path.is_relative()) {
             std::error_code error;
             fs::path temp_path = fs::canonical(path, error);
@@ -53,9 +53,9 @@ std::optional<opt_data> command_parser::parse_data() {
       throw std::logic_error("empty include field");
     }
     if (mp_.count("exclude")) {
-      auto &elem = mp_["exclude"].as<std::vector<fs::path>>();
+      auto& elem = mp_["exclude"].as<std::vector<fs::path>>();
 
-      for (auto &path : elem) {
+      for (auto& path : elem) {
         if (path.is_relative()) {
           std::error_code error;
           fs::path temp_path = fs::canonical(path, error);
@@ -68,8 +68,8 @@ std::optional<opt_data> command_parser::parse_data() {
       }
     }
 
-    if (mp_.count("level")) {
-      out_data.dir_opt.scan_opt.level_scanning = mp_["level"].as<int>();
+    if (mp_.count("recursive")) {
+      out_data.dir_opt.scan_opt.recursive = mp_["recursive"].as<bool>();
     }
 
     if (mp_.count("size")) {
@@ -86,7 +86,7 @@ std::optional<opt_data> command_parser::parse_data() {
     }
 
     if (mp_.count("hash")) {
-      std::string const &str = mp_["hash"].as<std::string>();
+      std::string const& str = mp_["hash"].as<std::string>();
       if (str == "crc32") {
         out_data.hash_opt.h_algo = hash_algo::crc_32;
       } else if (str == "md5") {
@@ -95,7 +95,7 @@ std::optional<opt_data> command_parser::parse_data() {
     }
 
     return out_data;
-  } catch (const std::exception &e) {
+  } catch (const std::exception& e) {
     std::cerr << e.what() << '\n';
     return std::nullopt;
   }

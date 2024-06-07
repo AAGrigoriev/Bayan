@@ -21,7 +21,7 @@ file_dublicate_parser::file_dublicate_parser(opt_hash&& option) {
   }
 }
 
-vec_path file_dublicate_parser::scan_dublicate(const group_path& g_path) {
+parsing_result file_dublicate_parser::scan_dublicate(const group_path& g_path) {
   m_pimpl->add_paths(g_path);
   return m_pimpl->duplicates();
 }

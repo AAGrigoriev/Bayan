@@ -12,6 +12,7 @@ namespace fs = std::filesystem;
 
 using vec_path = std::vector<fs::path>;
 using group_path = std::unordered_map<int, vec_path>;
+using parsing_result = std::vector<std::vector<fs::path>>;
 
 enum class hash_algo { crc_32 = 0, md5 };
 
@@ -23,7 +24,7 @@ struct opt_filter {
 
 struct opt_scan {
   std::vector<fs::path> includes_path;
-  int level_scanning;
+  int recursive;
 };
 
 struct opt_dir {
