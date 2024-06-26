@@ -5,6 +5,7 @@
 #include <boost/crc.hpp>
 #include <boost/uuid/detail/md5.hpp>
 #include <fstream>
+#include <vector>
 
 #include "options.hpp"
 
@@ -72,16 +73,15 @@ class file_wrapper {
 
   [[nodiscard]] const T& next_block(type_it it, std::ifstream& stream) {
     if (not_complete()) {
-      char buffer[block_size_];
-      std::fill(buffer, buffer + block_size_, 0);
+      std::vector<char> buffer(block_size_, 0);
 
       if (!stream.is_open()) {
         stream.open(name_, std::ios::binary);
       }
 
       stream.seekg(hashes_.size() * block_size_);
-      stream.read(buffer, block_size_);
-      hashes_.push_back(calc_check_sum<T>(buffer, block_size_));
+      stream.read(buffer.data(), block_size_);
+      hashes_.push_back(calc_check_sum<T>(buffer.data(), block_size_));
       return hashes_.back();
     } else {
       assert(it != hashes_.end());
